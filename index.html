@@ -160,6 +160,84 @@
         </div>
     </footer>
 
+    <!-- Chatbot Widget Start -->
+    <div id="chatbot-widget">
+      <button id="chatbot-toggle">💬</button>
+      <div id="chatbot-window" style="display:none;">
+        <div id="chatbot-header">
+          <span>🎬 MovieBot</span>
+          <span id="chatbot-close">&times;</span>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-loading" style="display:none;">
+          <div class="spinner"></div>
+        </div>
+        <form id="chatbot-form" autocomplete="off">
+          <input type="text" id="chatbot-input" placeholder="Ask for a movie..." required />
+          <button type="submit">➤</button>
+        </form>
+      </div>
+    </div>
+    <!-- Chatbot Widget End -->
+    <script>
+    const GEMINI_API_KEY = 'AIzaSyC_0HOGaPlMtz2hQ7UeEU7cYxqjt1DopSU';
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=' + GEMINI_API_KEY;
+
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const chatbotClose = document.getElementById('chatbot-close');
+    const chatbotForm = document.getElementById('chatbot-form');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotLoading = document.getElementById('chatbot-loading');
+
+    chatbotToggle.onclick = () => chatbotWindow.style.display = 'flex';
+    chatbotClose.onclick = () => chatbotWindow.style.display = 'none';
+
+    function addMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.className = 'chat-message ' + sender;
+      msg.innerHTML = `<div class="bubble">${text.replace(/\n/g, '<br>')}</div>`;
+      chatbotMessages.appendChild(msg);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function setLoading(isLoading) {
+      chatbotLoading.style.display = isLoading ? 'flex' : 'none';
+    }
+
+    async function getGeminiResponse(userMessage) {
+      const prompt = `You are a friendly movie recommendation bot for a Netflix-style app. Suggest movies or TV shows based on user preferences, genre, mood, or previously liked content. Be conversational and helpful.\nUser: ${userMessage}`;
+      const body = {
+        contents: [{ parts: [{ text: prompt }] }]
+      };
+      try {
+        const res = await fetch(GEMINI_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I could not get a recommendation right now.';
+      } catch (e) {
+        return 'Sorry, there was a problem connecting to the recommendation service.';
+      }
+    }
+
+    chatbotForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const userMsg = chatbotInput.value.trim();
+      if (!userMsg) return;
+      addMessage('user', userMsg);
+      chatbotInput.value = '';
+      setLoading(true);
+      let botReply = await getGeminiResponse(userMsg);
+      setLoading(false);
+      // Remove star characters and double asterisks from the response
+      botReply = botReply.replace(/[★☆⭐✩✪✫✬✭✮✯✰]/g, '').replace(/\*\*/g, '');
+      addMessage('bot', botReply);
+    };
+    </script>
 </body>
 
 </html>
