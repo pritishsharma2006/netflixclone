@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
 
+@font-face{
+  font-family: 'Netflix Sans Bolder';
+  src: url('fonts/NetflixSans-Bold.otf') format('opentype');
+}
+
 * {
     padding: 0;
     margin: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: "Netflix Sans Bolder", "Poppins", sans-serif;
 }
 
 body {
@@ -11,8 +16,8 @@ body {
 }
 
 .main {
-    background-image: url(assets/images/bg.jpg);
-    height: 70vh;
+    background-image: url(home_page_background_image.jpg);
+    height: 99vh;
     position: relative;
     background-position: center center;
     background-repeat: no-repeat;
@@ -20,9 +25,9 @@ body {
 }
 
 .main .box {
-    height: 70vh;
+    height: 99vh;
     width: 100%;
-    opacity: 0.69;
+    opacity: 0.79;
     background-color: black;
     position: absolute;
     top: 0;
@@ -34,8 +39,8 @@ nav {
     align-items: center;
     max-width: 65vw;
     margin: auto;
-    height: 100px;
-
+    height: 85px;
+    padding: 0 145px;
 }
 
 nav img {
@@ -88,14 +93,19 @@ nav button {
     z-index: 20;
 }
 
+.nav-btn{
+    width: 186px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .btn {
-    padding: 3px 8px;
-    font-weight: 400;
+    padding: 4px 12px;
+    font-weight: 540;
     background-color: rgb(117, 115, 115);
     color: white;
-    border: 1px solid white;
+    border-style: none;
     border-radius: 4px;
-
 }
 
 .btn-red {
@@ -105,6 +115,16 @@ nav button {
     font-size: 20px;
     border-radius: 4px;
     font-weight: bold;
+}
+
+.language-switch{
+    width: 15px;
+    padding: 2px;
+}
+
+.down-arrow{
+    width: 8px;
+    padding: 0 2px;
 }
 
 .hero-buttons {
@@ -122,6 +142,18 @@ nav button {
     border-radius: 4px;
     background-color: rgba(23, 23, 23, 0.7);
     border: 1px solid rgba(126, 122, 122, 0.5);
+}
+
+.btn-lang{
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.english{
+    padding: 0 5px;
 }
 
 .btn-red-sm {
