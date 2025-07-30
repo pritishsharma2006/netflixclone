@@ -13,6 +13,7 @@
         <nav>
             <span><img width="63" src="assets/Netflix_2015_logo.svg" alt=""></span>
             <div class="nav-btn">
+                <button class="btn" id="theme-toggle">☀️</button>
                 <button class="btn btn-lang"><img class="language-switch" src="assets/language-svgrepo-com.svg"><span class="english">English</span><img class="down-arrow" src="assets/down-arrow-svgrepo-com.svg"></button>
                 <button class="btn btn-red-sm">Sign In</button>
             </div>
@@ -202,6 +203,7 @@
     </div>
     <!-- Chatbot Widget End -->
     <script>
+    const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
     const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=' + GEMINI_API_KEY;
 
     const chatbotToggle = document.getElementById('chatbot-toggle');
@@ -258,6 +260,31 @@
       botReply = botReply.replace(/[★☆⭐✩✪✫✬✭✮✯✰]/g, '').replace(/\*\*/g, '');
       addMessage('bot', botReply);
     };
+// <<<<<<< feature/light-dark-mode
+    // --- Dark/Light Mode JavaScript ---
+      const themeToggle = document.getElementById("theme-toggle");
+
+      // Function to set theme
+      function setTheme(theme) {
+        document.body.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme); // Save user's preference
+        themeToggle.textContent = theme === "dark" ? "🌙" : "☀️"; // Update button emoji
+      }
+
+      // Check for saved theme preference on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "light"; // Default to light if no preference
+        setTheme(savedTheme);
+      });
+
+      // Toggle theme on button click
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = document.body.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+      });
+
+// =======
 
 
     function toggleFAQ(element) {
@@ -272,6 +299,7 @@
             // Toggle the clicked FAQ item
             element.classList.toggle('active');
         }
+// >>>>>>> main
     </script>
 </body>
 
