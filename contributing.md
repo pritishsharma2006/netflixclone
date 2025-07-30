@@ -11,3 +11,9 @@ Click the Fork button (top-right) to make your own copy.
 -Select your branch
 -Add a clear title and description
 -Mention the related issue (e.g., Closes #3)
+
+Before Submitting a PR:
+- Test your changes locally
+- Do not overwrite others’ work
+- Avoid breaking the existing UI or layout
+- Check mobile responsiveness (if applicable)
