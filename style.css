@@ -251,10 +251,10 @@ transform: scale(1.05);
 
 .btn-red-sm {
   background-color: var(--btn-red-bg);
-  color: var(--btn-red-text);
+  color: var(--btn-red-text); 
   display: flex;
   align-items: center;
-  margin:3px px;
+  margin:3px;
 }
 
 .btn-lang .language-switch,
