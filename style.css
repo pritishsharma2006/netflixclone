@@ -239,6 +239,13 @@ transform: scale(1.05);
 .btn-red-sm {
   background-color: var(--btn-red-bg);
   color: var(--btn-red-text);
+  padding: 8px 16px;             
+  line-height: 1.2;               
+  white-space: nowrap;            
+  display: inline-block;          
+  height: auto;                   
+  overflow: visible;              
+  writing-mode: horizontal-tb;    
 }
 
 .btn-lang .language-switch,
